@@ -1,0 +1,35 @@
+<Application>
+    <StreamManager>
+        <Live>
+            <!-- When enabled, the server will assume that incoming live streams have -->
+            <!-- timestamps that are based on an absolute clock, such as a SMPTE time -->
+            <!-- signal contained within the encoder's input source.                  -->
+            <!-- Default is false.                                                    -->
+            <AssumeAbsoluteTime>true</AssumeAbsoluteTime>
+          
+            <!-- Allow take over so that encoders that go down (for some reason) and  -->
+            <!-- and come back up can immediately republish.                          -->
+            <PublishTimeout>0</PublishTimeout>
+
+            <!-- This configuration takes care of situation when the timestamps of    -->
+            <!-- certain messages in internally or externally published streams don't -->
+            <!-- honor absolute clock contract.                                       -->
+            <!-- The possible values are listed below:                                -->
+            <!-- 0 disables the work around and is default if the configuration is    -->
+            <!--   not present.                                                       -->
+            <!-- 1 handles the scenario for externally published streams only         -->
+            <!-- 2 handles the scenario for internally published streams only         -->
+            <!-- 3 handles both of above                                              -->
+            <AdjustForZeroTimeStampMessages>2</AdjustForZeroTimeStampMessages>
+
+            <!-- When enabled along with AssumeAbsoluteTime, the server will          -->
+            <!-- assume that incoming live streams will always maintain the           -->
+            <!-- timestamps based on an absolute clock across server and stream       -->
+            <!-- restarts.                                                            -->
+            <!-- Default is true.                                                     -->
+            <AdjustForRecordingRollover>false</AdjustForRecordingRollover>
+          
+        </Live>
+    </StreamManager>
+</Application>
+

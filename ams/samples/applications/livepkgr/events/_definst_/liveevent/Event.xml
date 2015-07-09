@@ -1,0 +1,8 @@
+<Event>
+  <EventID>liveevent</EventID>
+  <Recording>
+    <FragmentDuration>4000</FragmentDuration>
+    <SegmentDuration>400000</SegmentDuration>
+    <DiskManagementDuration>3</DiskManagementDuration>
+  </Recording>
+</Event>

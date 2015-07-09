@@ -1,0 +1,39 @@
+#
+# Platform/Configuration independent makefile for building 64bit FileModule library
+#
+
+SrcDir := .
+OutputDir := ./sampleFileModule64
+ObjDir := $(OutputDir)
+IncludeDir := $(SrcDir)/../include/
+
+
+FileModuleLib := ${OutputDir}/FileModule.so
+FileModuleSrcs := ${SrcDir}/SimpleFileAdaptor.cpp		   
+FileModuleObjs := $(patsubst %.cpp,$(ObjDir)/%.o,$(notdir $(FileModuleSrcs)))
+
+SHARED := -shared
+FileModule_CC = $(CC)
+FileModule_CXX := $(CXX)
+FileModule_LDFLAGS := $(LDFLAGS) $(DBGFLAGS)
+FileModule_CXXFLAGS := $(CXXFLAGS) $(DBGFLAGS) -m64 -fPIC -DUNIX -D_REENTRANT
+
+FileModule_CXXFLAGS := $(FileModule_CXXFLAGS) \
+                -I$(SrcDir) \
+		-I$(IncludeDir)
+		
+-include $(FileModuleObjs:.o=.d)
+
+$(OutputDir)/%.o: $(SrcDir)/%.cpp 
+	mkdir -p $(ObjDir)
+	$(FileModule_CXX) $(FileModule_CXXFLAGS) $< -c -o $@
+
+.PHONY: FileModule FileModule_clean
+
+FileModule: $(FileModuleLib)
+
+FileModule_clean:
+	-rm -rf $(FileModuleLib) $(FileModuleObjDir) 
+
+$(FileModuleLib): $(FileModuleObjs)
+	$(FileModule_CXX) $(SHARED) -o $(FileModuleLib) $(FileModuleObjs)

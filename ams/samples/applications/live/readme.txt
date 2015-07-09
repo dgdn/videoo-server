@@ -1,0 +1,55 @@
+#################################################################
+# 		ReadMe: live service				#
+#								#
+#################################################################
+
+The live service is an Adobe-built service that lets you stream 
+live media to users without writing any code. (Note: this service 
+does not support server-side recording or DVR functionality)
+
+Adobe Media Standard Server only runs Adobe-built services, 
+also called "signed" applications.
+
+Adobe Media Professional Server and Adobe Media 
+Starter Server support unsigned (user-created) applications. If 
+you're using one of these server versions, you can modify the live 
+service source code to create your own applications and enable server-
+side recording and DVR functionality.
+
+========================================================================
+Deploying an unsigned live service 
+(Adobe Media Professional Server or Adobe Media Starter Server only)
+========================================================================
+
+To deploy an unsigned version of live service you can either replace 
+the existing service, or create a new service:
+
+1. [New Service] Create a new folder in the 
+   {AMS-Install-Dir}/applications/ folder.
+
+2. [New Service] (Optional) To make your new folder the default live 
+   service, open the file, {AMS-Install-Dir}/conf/ams.ini and edit 
+   the LIVE_DIR parameter and point to the new folder you created 
+   in step 1.
+   
+3. [Existing Service] To replace the default Adobe signed 
+   live service, first back up the following files from the folder 
+   {AMS-Install-Dir}/applications/live: 
+   
+   * main.far
+   * Application.xml
+   * allowedHTMLDomains.txt
+   * allowedSWFDomains.txt
+
+4. Copy all files from {AMS-Install-Dir}/samples/applications/live to 
+   the folder you created in step 1 or to the existing folder, 
+   {AMS-Install-Dir}/applications/live.
+
+-------------------------------------------------------------------------
+
+For information about using and configuring the live service, see the 
+online documentation provided at the following location:
+http://help.adobe.com/en_US/adobemediaserver/devguide
+
+For information about troubleshooting the live service, see the 
+Installation Guide in the {AMS-Install-Dir}/documentation folder. 

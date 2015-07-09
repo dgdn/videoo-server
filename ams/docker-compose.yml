@@ -1,0 +1,12 @@
+ams:
+  image: dgdn/ams 
+  working_dir: /opt/adobe/ams
+  ports:
+   - "80:80"
+   - "1111:1111"
+   - "1935:1935"
+  volumes:
+   - ./modules/auth:/opt/adobe/ams/modules/auth
+   - ./modules/access:/opt/adobe/ams/modules/access
+   - ./modules/fileio:/opt/adobe/ams/modules/fileio
+  command: sh -c './amsmgr server ams start && ./amsmgr adminserver start && tail -f /opt/adobe/ams/logs/master.00.log'

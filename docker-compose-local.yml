@@ -1,0 +1,40 @@
+app: 
+    build: ./app
+    volumes:
+     - /go/www
+    ports:
+     - "9000:80"
+    environment:
+     - ENCODE_HOST=dockerhost.com
+     - FS_HOST=dockerhost.com
+fs: 
+    build: ./fs
+    volumes:
+     - /go/content
+    ports:
+     - "5000:80"
+nfsserver:
+    image: cpuguy83/nfs-server
+    volumes_from: 
+     - fs
+    ports:
+     - "2049:2049"
+    privileged: true
+    command: /go/content/encoded
+encode:
+    build: ./encode-server
+    ports:
+     - "6000:80"
+    environment:
+     - FS_HOST=dockerhost.com
+ams:
+  build: ./ams 
+  working_dir: /opt/adobe/ams
+  ports:
+   - "80:80"
+   - "1111:1111"
+   - "1935:1935"
+  links:
+   - nfsserver:nfs
+  privileged: true
+  command: sh -c 'rpcbind && mount -t nfs -o proto=tcp,port=2049 $NFS_PORT_2049_TCP_ADDR:/go/content/encoded /opt/adobe/ams/webroot/vod && ./amsmgr server ams start && ./amsmgr adminserver start && tail -f /opt/adobe/ams/logs/master.00.log'

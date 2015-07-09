@@ -1,0 +1,31 @@
+<Application>
+
+	<!-- Don't idle out clients participating in a multicast stream.        -->
+	<AutoCloseIdleClients enable="false" />
+	
+	<!-- Live queuing and aggregate messages are turned off the multicast	-->
+	<!-- sample application to enhance the performance and flow of messages -->
+	<!-- delivered to multicast streams. Setting the queue to "true" can 	-->
+	<!-- cause delay in the multicast playback.				-->
+	<StreamManager>
+		<Live>
+			<Queue enabled="false">
+				<AggregateMessages enabled="false">
+				</AggregateMessages>
+			</Queue>
+		</Live>
+	</StreamManager>
+	<Client>
+		<AggregateMessages enabled="false"></AggregateMessages>
+	</Client>
+
+	<!-- Specifes which protocols cannot be used to connect to this app. 	-->
+	<!-- Protocols can be rtmp, rtmps, or rtmpe.  Protocols are specified 	-->
+	<!-- in a comma delimited list.  Any protocol not specified is allowed. -->
+	<!-- Example, <DisallowedProtocols>rtmp,rtmps</DisallowedProtocols> 	-->
+	<!-- disallows rtmp and rtmps and only allows clients to connect via 	-->
+	<!-- rtmpe.  Default is to allow all protocols. 						-->
+	<DisallowedProtocols></DisallowedProtocols>
+
+</Application>
+
