@@ -10,7 +10,7 @@ docker and docker-compose
 ## simple running up step
 0. build the go-ffmpeg docker image int the go-ffmpeg dir ```docker build -t go-ffmpeg .```
 1. change the ams/sample/videoPlayer/videoPaly.html content of ip addr to your own host local ip
-2. run ```docker-compose -f docker-compose-local.yml up``` in the cli
+2. run ```docker-compose up -d``` in the cli
 3. set the browser to allow cors and open ams/sample/videoPaly/videoPlayer.html in the browser
 4. click the upload button and select a video file to upload
 5. wait a moment, the video can play in the flash player
